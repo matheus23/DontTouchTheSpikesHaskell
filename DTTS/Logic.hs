@@ -29,11 +29,13 @@ windowSize = filterMapE filterSize $ remember (500, 500)
 screensBehaviour :: Behaviour GtkEvent Screen
 screensBehaviour = fold (PreGame $ initialGS $ mkStdGen 42) simulateScreen
   where
-    simulateScreen (KeyPress _) (PreGame gs)  = InGame gs
-    simulateScreen _            (PreGame gs)  = PreGame gs
-    simulateScreen (KeyPress _) (InGame gs)   = handleGameOver $ advanceGameState True gs
-    simulateScreen Tick         (InGame gs)   = handleGameOver $ advanceGameState False gs
-    simulateScreen (KeyPress _) (GameOver gs) = PreGame $ initialGS $ rand gs
+    simulateScreen (KeyPress (Special Escape)) (InGame gs)   = Pause gs
+    simulateScreen (KeyPress (Special Escape)) (Pause gs)    = InGame gs
+    simulateScreen (KeyPress _)                (PreGame gs)  = InGame gs
+    simulateScreen _                           (PreGame gs)  = PreGame gs
+    simulateScreen (KeyPress _)                (InGame gs)   = handleGameOver $ advanceGameState True gs
+    simulateScreen Tick                        (InGame gs)   = handleGameOver $ advanceGameState False gs
+    simulateScreen (KeyPress _)                (GameOver gs) = PreGame $ initialGS $ rand gs
     simulateScreen _ screen = screen
 
     handleGameOver (gs, True) = GameOver gs

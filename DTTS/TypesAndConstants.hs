@@ -6,7 +6,11 @@ import Graphics.Declarative.Cairo.Form
 import Data.Vec2
 import System.Random
 
-data Screen = PreGame GameState | InGame GameState | GameOver GameState
+data Screen
+  = PreGame GameState
+  | InGame GameState
+  | Pause GameState
+  | GameOver GameState
 
 data GameState = GameState
   { playerPos :: Vec2

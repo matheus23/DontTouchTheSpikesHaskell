@@ -17,6 +17,7 @@ renderScreen (PreGame gs) = pressKeySign `atop` (scaleToSizeOnAxis 500 Vec2.down
     pressKeySign = signText "Press Any Key"
     signText str = centeredHV $ text defaultTextStyle { textColor = lightBlue, fontSize = 30, bold = True } str
 renderScreen (InGame gs) = scaleToSizeOnAxis 500 Vec2.down $ render gs
+renderScreen (Pause gs) = scaleToSizeOnAxis 500 Vec2.down $ render gs
 renderScreen (GameOver gs) = (centeredHV $ append Vec2.down [gameOverSign, scoreSign]) `atop` (scaleToSizeOnAxis 500 Vec2.down $ render gs)
   where
     textStyle = defaultTextStyle { textColor = red, fontSize = 30, bold = True }
