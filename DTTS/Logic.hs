@@ -44,7 +44,7 @@ screensBehaviour = fold (PreGame $ initialGS $ mkStdGen 42) simulateScreen
 
 
 initialGS :: StdGen -> GameState
-initialGS rand = GameState (gameWidth/2, gameHeight/2) (playerMoveVel 0, playerJumpVel) [] [] 0 0
+initialGS rand = GameState (gameWidth/2, gameHeight/2) (playerMoveVel 0, playerJumpVel) [] [] 0 rand 0
 
 genSpikes :: StdGen -> Int -> ([Int], StdGen)
 genSpikes rand score = (spikes, newRand)
